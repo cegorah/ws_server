@@ -45,8 +45,7 @@ WEBSOCKET_AMQP_CONNECTION="amqp://admin:secret_password@localhost:5672/admin"
 ```WEBSOCKET_DEBUG_TOKEN=True``` option could be used for debugging purposes.  
 ##### !!Warning!!
 You should not use this option in production.
-It disables JWE-authorization middleware and create the token
-Create a mock token inside the UserSession.process() with the following parameters:
+It disables JWE-authorization middleware and create a mock token inside the UserSession.process() with the following parameters:
 ```python
 {
 "expired": now()+timedelta(hours=6),
