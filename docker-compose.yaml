@@ -1,0 +1,41 @@
+version: '3'
+volumes:
+  myapp_static:
+
+services:
+  socket_app:
+    build: .
+    volumes:
+      - myapp_static:/home/websocket_server
+    expose:
+      - "8080"
+    env_file:
+      - ./.env.prod
+    links:
+      - broker
+    depends_on:
+      - broker
+
+  broker:
+    container_name: socket_rabbit
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "15672:15672"
+    expose:
+      - "5672"
+    env_file:
+      - ./.env.prod
+
+  nginx:
+    container_name: socket_nginx
+    build: containers/services/nginx
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - myapp_static:/home/websocket_server
+    links:
+      - socket_app
+    depends_on:
+      - socket_app

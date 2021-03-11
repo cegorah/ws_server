@@ -1,0 +1,21 @@
+.git/
+containers/
+
+build
+dist
+*.egg-info
+*.egg/
+*.pyc
+*.swp
+*.db
+*.log
+
+.tox
+.coverage
+html/*
+__pycache__
+*.cache*
+*_dev.*
+
+# Compiled Documentation
+docs/_build
